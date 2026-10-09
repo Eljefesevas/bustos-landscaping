@@ -24,13 +24,16 @@ Visitors browse on phones and desktops, often while looking at their own yard. T
 - Service area beyond Montclair is confirmed by phone; no fixed radius is published.
 
 ## Brand Commitments
-- Name: Bustos Landscaping. The current logo is a temporary placeholder.
+- Name: Bustos Landscaping. The official logo is the black-and-green BL monogram with the wordmark "BUSTOS LANDSCAPE". It lives in `public/assets/brand/`; the best master available is an 875px PNG from the owner's old site, and no vector master exists yet. On dark surfaces the logo sits on an ivory panel and is never recoloured.
 - The family story text in `src/lib/data.ts` is the owners' own words and is reproduced exactly.
 
 ## Evidence on Hand
-- No real project photography yet. All imagery is either temporary illustration or free-license stock photography, and must be labeled as concept imagery rather than company work.
-- No real reviews, ratings, or customer names. Review slots are labeled placeholders; none may be invented.
-- No case studies, project counts, awards, or licensing claims may be fabricated.
+- Owner-authorised real project photography, reused from the owner's original website (bustoslandscaping.net), is in `public/assets/work/`. EXIF/GPS has been stripped, some photos are cropped, and visible house numbers are blurred. Captions describe only what is visible; the source filenames are SEO labels, so locations, dates and client details are never claimed.
+- `src/lib/projects.ts` groups these photos into projects. Before/after sliders are used only for pairs shot from the same position.
+- The homepage hero is a free-license Unsplash scene, labelled on the page as a concept scene and not a Bustos project.
+- Verified from the old site: residential and commercial work, and the service-area communities listed on the Contact page.
+- Unresolved conflicts, which must not be asserted until confirmed: years of experience (old site says "over 30 years", this site says since 2011); the spelling of the second owner's name ("Jamie" here, "Jaime" in old-site reviews); whether junk removal, tree/palm removal and drought-tolerant landscaping are still offered.
+- No reviews, ratings, awards, licences or project counts may be invented. Old-site Yelp review screenshots exist but have not been reused.
 
 ## Product Principles
 1. Honesty before polish: never present stock or illustrated scenes as finished client work.

@@ -37,8 +37,10 @@
 .garden-hero:after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(217,204,180,.6)}
 
 /* Copy */
+/* Local scrims keep small type legible wherever the photo runs bright, without darkening the scene. */
+.gh-copy::before{content:'';position:absolute;inset:-70px -120px -50px -140px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 60% 62% at 38% 52%,rgba(14,18,15,.62) 0%,rgba(14,18,15,.38) 55%,rgba(14,18,15,0) 100%)}
 .gh-copy{position:absolute;left:max(6vw,24px);right:max(6vw,24px);bottom:clamp(104px,15vh,168px);max-width:46rem}
-.gh-services{margin:0 0 26px;font-size:.7rem;font-weight:500;letter-spacing:.24em;line-height:1.6;text-transform:uppercase;color:var(--gh-stone)}
+.gh-services{margin:0 0 26px;font-size:.7rem;font-weight:500;letter-spacing:.24em;line-height:1.6;text-transform:uppercase;color:var(--gh-stone);text-shadow:0 1px 12px rgba(14,18,15,.75)}
 .gh-services i{font-style:normal;padding:0 .7em;color:var(--gh-sage)}
 .garden-hero h1{
   margin:0;max-width:13ch;
@@ -66,6 +68,7 @@
 
 /* Process rule */
 .gh-foot{position:absolute;right:max(5vw,24px);bottom:34px;width:min(360px,34vw)}
+.gh-foot::before{content:'';position:absolute;inset:-36px -48px -30px -48px;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 70% 75% at 50% 55%,rgba(14,18,15,.6) 0%,rgba(14,18,15,.3) 60%,rgba(14,18,15,0) 100%)}
 .gh-track{position:relative;height:1px;background:rgba(243,239,230,.26)}
 .gh-track span{position:absolute;inset:0 auto 0 0;width:calc(var(--p,1)*100%);background:var(--gh-paper)}
 .gh-progress ol{display:grid;grid-template-columns:repeat(3,1fr);margin:12px 0 0;padding:0;list-style:none}
@@ -73,8 +76,8 @@
 .gh-progress li:nth-child(2){text-align:center}
 .gh-progress li:nth-child(3){text-align:right}
 .garden-hero[data-stage="0"] li:nth-child(n+2),
-.garden-hero[data-stage="1"] li:nth-child(3){color:rgba(243,239,230,.42)}
-.gh-credit{margin:18px 0 0;font-size:.64rem;line-height:1.5;text-align:right;color:rgba(243,239,230,.62)}
+.garden-hero[data-stage="1"] li:nth-child(3){color:rgba(243,239,230,.8)}
+.gh-credit{margin:18px 0 0;font-size:.75rem;line-height:1.5;text-align:right;text-wrap:balance;color:rgba(243,239,230,.92);text-shadow:0 1px 10px rgba(14,18,15,.7)}
 
 .gh-cue{
   position:absolute;left:max(6vw,24px);bottom:34px;margin:0;
@@ -104,7 +107,7 @@
       linear-gradient(0deg,rgba(14,18,15,.9) 0%,rgba(14,18,15,.76) 40%,rgba(14,18,15,.28) 54%,rgba(14,18,15,0) 66%),
       linear-gradient(180deg,rgba(14,18,15,.45) 0%,rgba(14,18,15,0) 22%);
   }
-  .gh-copy{left:20px;right:20px;bottom:146px}
+  .gh-copy{left:20px;right:20px;bottom:188px}
   .gh-services{margin-bottom:14px;font-size:.6rem;letter-spacing:.18em}
   .gh-services i{padding:0 .45em}
   .garden-hero h1{font-size:clamp(2.2rem,9.6vw,3rem)}
@@ -121,6 +124,7 @@
 }
 @media (orientation:portrait){
   .gh-plate{object-position:50% 50%}
+  .gh-copy::before{background:radial-gradient(ellipse 80% 62% at 40% 45%,rgba(14,18,15,.74) 0%,rgba(14,18,15,.5) 55%,rgba(14,18,15,0) 100%)}
 }
 @media (prefers-reduced-motion:reduce){
   .gh-plate-before,.gh-canvas,.gh-cue{display:none}
