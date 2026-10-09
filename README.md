@@ -30,4 +30,4 @@ No repository was initialized, nothing was pushed, and nothing was deployed. All
 
 `npm run lint`, `npx tsc --noEmit`, `npm run build`.
 
-See PLACEHOLDER-ASSETS.md for the 2D animation limitations and illustration replacement steps.
+See PLACEHOLDER-ASSETS.md for how the hero's Garden Reveal works and the asset replacement steps.
