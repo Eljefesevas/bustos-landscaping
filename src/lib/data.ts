@@ -1,0 +1,10 @@
+export const story = 'Our story began in Michoacán, Mexico, where we were born and raised before coming to America as kids. Growing up, we worked alongside our dad in landscaping, learning the business from him. In 2011, we took over his business and have been growing it ever since. As brothers, we’ve worked hard to build on what our dad started, always putting family, quality, and dedication into everything we do. Above all, we thank Jesus for the incredible opportunities and blessings He has given us. We know we wouldn’t be where we are today without Him. To us, landscaping is more than just a job—it’s a family legacy we’re proud to carry on.';
+export const services = [
+{title:'Landscaping & Design',image:'landscaping',description:'Thoughtfully designed outdoor spaces, grounded in the way you live.',items:['General landscaping','Landscape design','Yard cleanups','Mulch','Rock installation']},
+{title:'Lawn Maintenance',image:'lawn',description:'Consistent care for a landscape that looks its best in every season.',items:['Lawn mowing','Lawn maintenance','Tree trimming','Bush trimming','Recurring maintenance']},
+{title:'Concrete Services',image:'concrete',description:'A strong foundation. A clean finish. Concrete made for everyday living.',items:['Concrete installation','Concrete work','Concrete demolition']},
+{title:'Pavers & Hardscaping',image:'pavers',description:'Add structure, character, and purpose to your outdoor space.',items:['Paver installation','Block walls','Retaining walls','Outdoor hardscaping']},
+{title:'Irrigation & Turf',image:'turf',description:'Practical water solutions and a fresh foundation of green.',items:['Irrigation','Sprinkler repair','Sod installation','Artificial turf installation']},
+{title:'Excavation & Demolition',image:'excavation',description:'Prepare your property for its next chapter with careful site work.',items:['Excavation','Grading','Demolition','Site preparation']},
+];
+export const phones = [{label:'(909) 455-7980',value:'+19094557980'},{label:'(928) 503-6277',value:'+19285036277'}];

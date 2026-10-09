@@ -1,0 +1,7 @@
+"use client";
+import {useEffect,useState} from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import {Menu,X,ArrowUpRight,Phone} from 'lucide-react';
+export const links=[['Home','/'],['Services','/services'],['Our Work','/our-work'],['About Us','/about'],['Contact','/contact']];
+export default function Navigation(){const[open,setOpen]=useState(false);const[scrolled,setScrolled]=useState(false);useEffect(()=>{const f=()=>setScrolled(window.scrollY>40);f();window.addEventListener('scroll',f,{passive:true});return()=>window.removeEventListener('scroll',f);},[]);return <><header className={`nav ${scrolled?'compact':''}`}><Link href="/" aria-label="Bustos Landscaping home"><Image src="/assets/logo/temporary-logo.svg" alt="Bustos Landscaping temporary logo" width={230} height={58} priority/></Link><nav aria-label="Main navigation" className="desktop-links">{links.map(([label,url])=><Link key={url} href={url}>{label}</Link>)}</nav><a className="nav-estimate" href="tel:+19094557980">Get a Free Estimate <ArrowUpRight size={17}/></a><button className="menu-toggle" aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="mobile-menu" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button>{open&&<nav id="mobile-menu" className="mobile-menu" aria-label="Mobile navigation">{links.map(([label,url])=><Link key={url} href={url} onClick={()=>setOpen(false)}>{label}</Link>)}</nav>}</header><a className="mobile-call" href="/contact#phone-options"><Phone size={17}/> Call for Free Estimate</a></>}

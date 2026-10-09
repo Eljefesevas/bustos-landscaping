@@ -1,0 +1,3 @@
+"use client";
+import {useEffect,useRef} from 'react';
+export default function Reveal({children}:{children:React.ReactNode}){const root=useRef<HTMLDivElement>(null);useEffect(()=>{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}}),{threshold:.08});root.current?.querySelectorAll('[data-reveal]').forEach(el=>{el.classList.add('reveal-ready');observer.observe(el);});return()=>observer.disconnect();},[]);return <div ref={root}>{children}</div>}
