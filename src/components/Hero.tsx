@@ -1,4 +1,6 @@
 "use client";
+import { useTranslations } from '@/components/LanguageProvider';
+
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
@@ -22,6 +24,7 @@ const sceneFor = (src: string) => {
 };
 
 export default function Hero() {
+  const t = useTranslations();
   const root = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
   const beforeImg = useRef<HTMLImageElement>(null);
@@ -104,24 +107,23 @@ export default function Hero() {
 
       <div className="gh-copy">
         <p className="gh-services">
-          Landscape Design<i aria-hidden="true"> • </i>Installation<i aria-hidden="true"> • </i>Outdoor Living
-        </p>
-        <h1 id="hero-title">Bringing Outdoor Spaces to&nbsp;Life</h1>
-        <p className="gh-lede">Thoughtful landscaping, refined craftsmanship, and a personal process from concept to completion.</p>
+          {t("Landscape Design")}<i aria-hidden="true"> • </i>{t("Installation")}<i aria-hidden="true"> • </i>{t("Outdoor Living ")}</p>
+        <h1 id="hero-title">{t("Bringing Outdoor Spaces to Life")}</h1>
+        <p className="gh-lede">{t("Thoughtful landscaping, refined craftsmanship, and a personal process from concept to completion.")}</p>
         <div className="gh-actions">
-          <Link className="gh-button gh-button-primary" href="/our-work">View Our Work <ArrowUpRight size={18} strokeWidth={1.6} aria-hidden="true" /></Link>
-          <Link className="gh-button gh-button-quiet" href="/contact">Start Your Project</Link>
+          <Link className="gh-button gh-button-primary" href="/our-work">{t("View Our Work ")}<ArrowUpRight size={18} strokeWidth={1.6} aria-hidden="true" /></Link>
+          <Link className="gh-button gh-button-quiet" href="/contact">{t("Start Your Project")}</Link>
         </div>
       </div>
 
       <div className="gh-foot">
         <div className="gh-progress" aria-hidden="true">
           <div className="gh-track"><span /></div>
-          <ol>{stages.map((s, i) => <li key={s} data-i={i}>{s}</li>)}</ol>
+          <ol>{stages.map((s, i) => <li key={s} data-i={i}>{t(s)}</li>)}</ol>
         </div>
-        <p className="gh-credit">Concept scene, not a Bustos project. Photo: Gene Giromini / Unsplash</p>
+        <p className="gh-credit">{t("Concept scene, not a Bustos project. Photo: Gene Giromini / Unsplash")}</p>
       </div>
-      <p className="gh-cue" aria-hidden="true"><span />Scroll to bring the garden in</p>
+      <p className="gh-cue" aria-hidden="true"><span />{t("Scroll to bring the garden in")}</p>
     </section>
   );
 }

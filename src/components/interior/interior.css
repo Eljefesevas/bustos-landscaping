@@ -137,12 +137,6 @@
 .ip-words-quote p:not(.ip-words-by){font-family:var(--font-serif);font-size:clamp(1.45rem,2.2vw,2rem);line-height:1.5;color:var(--forest)}
 .ip-words-quote p:not(.ip-words-by):first-letter{font-size:3.4em;float:left;line-height:.8;margin:.08em .08em 0 0;color:var(--sandstone)}
 .ip-words-quote .ip-words-by{font-family:var(--font-body);line-height:1.6;margin-top:var(--space-6);font-size:var(--fs-eyebrow);font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--sandstone-ink)}
-.ip-chapters{background:var(--band);border-top:1px solid var(--line)}
-.ip-chapters ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;list-style:none}
-.ip-chapters li{display:flex;flex-direction:column;gap:var(--space-4);padding:var(--space-8) var(--space-5) var(--space-8) 0}
-.ip-chapters li+li{padding-left:var(--space-5);border-left:1px solid var(--line)}
-.ip-chapters h3{font-family:var(--font-serif);font-size:clamp(1.6rem,2.4vw,2.2rem);font-weight:500;line-height:1.1;letter-spacing:-.005em;color:var(--forest)}
-.ip-chapters p{font-size:.92rem;line-height:1.7;color:var(--muted)}
 .ip-onjob{padding-top:var(--section-y);padding-bottom:var(--section-y);background:var(--ivory)}
 .ip-onjob-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--space-5)}
 .ip-onjob-0{grid-column:1/6;grid-row:1/3;min-height:100%}
@@ -217,9 +211,6 @@
   .ip-index li:nth-child(4) a{padding-left:0}
   .ip-index li:nth-child(n+4){border-top:1px solid var(--line)}
   .ip-process-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .ip-chapters ol{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .ip-chapters li:nth-child(3){padding-left:0;border-left:0}
-  .ip-chapters li:nth-child(n+3){border-top:1px solid var(--line)}
   .ip-service-copy{grid-column:8/13}
   .ip-service-flip .ip-service-copy{grid-column:1/6}
 }
@@ -249,9 +240,7 @@
   .ip-index li:nth-child(even){border-left:1px solid var(--line)}
   .ip-index li a,.ip-index li:first-child a,.ip-index li:nth-child(4) a{padding:var(--space-4) var(--space-3)}
   .ip-index li:nth-child(odd) a{padding-left:0}
-  .ip-process-steps,.ip-chapters ol{grid-template-columns:minmax(0,1fr)}
-  .ip-chapters li,.ip-chapters li+li{padding:var(--space-6) 0;border-left:0;border-top:1px solid var(--line)}
-  .ip-chapters li:first-child{border-top:0}
+  .ip-process-steps{grid-template-columns:minmax(0,1fr)}
   .ip-capabilities{grid-template-columns:minmax(0,1fr)}
   .ip-field-row{grid-template-columns:minmax(0,1fr)}
   .ip-form{padding:var(--space-5)}

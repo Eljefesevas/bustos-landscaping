@@ -1,3 +1,4 @@
+import { getTranslations } from '@/lib/i18n/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowUpRight, Phone } from 'lucide-react';
@@ -9,39 +10,42 @@ export const estimateHref = '/contact#phone-options';
 type Img = { src: string; alt: string; caption?: string };
 
 /* Editorial page opening shared by every interior page */
-export function PageHero({ eyebrow, title, accent, lede, image, children }: { eyebrow: string; title: string; accent?: string; lede: string; image: Img; children?: React.ReactNode }) {
+export async function PageHero({ eyebrow, title, accent, lede, image, children }: { eyebrow: string; title: string; accent?: string; lede: string; image: Img; children?: React.ReactNode }) {
+  const t = await getTranslations();
   return (
     <section className="ip-hero" aria-labelledby="page-title">
       <div className="ip-hero-copy">
-        <p className="eyebrow">{eyebrow}</p>
-        <h1 id="page-title">{title}{accent && <> <em>{accent}</em></>}</h1>
-        <p className="ip-hero-lede">{lede}</p>
+        <p className="eyebrow">{t(eyebrow)}</p>
+        <h1 id="page-title">{t(title)}{accent && <> <em>{t(accent)}</em></>}</h1>
+        <p className="ip-hero-lede">{t(lede)}</p>
         {children}
       </div>
       <figure className="ip-hero-image ip-photo">
-        <Image src={image.src} alt={image.alt} fill priority sizes="(max-width: 860px) 100vw, 45vw" />
-        {image.caption && <figcaption>{image.caption}</figcaption>}
+        <Image src={image.src} alt={t(image.alt)} fill priority sizes="(max-width: 860px) 100vw, 45vw" />
+        {image.caption && <figcaption>{t(image.caption)}</figcaption>}
       </figure>
     </section>
   );
 }
 
-export function EstimateActions({ light = false }: { light?: boolean }) {
+export async function EstimateActions({ light = false }: { light?: boolean }) {
+  const t = await getTranslations();
   return (
     <div className="actions">
-      <Link className={`button${light ? ' cream' : ''}`} href={estimateHref}>Request an Estimate <ArrowUpRight size={18} aria-hidden="true" /></Link>
+      <Link className={`button${light ? ' cream' : ''}`} href={estimateHref}>{t("Request an Estimate ")}<ArrowUpRight size={18} aria-hidden="true" /></Link>
       <a className={`button ${light ? 'outline' : 'ip-button-quiet'}`} href={`tel:${phones[0].value}`}><Phone size={17} aria-hidden="true" /> {phones[0].label}</a>
     </div>
   );
 }
 
 /* Closing invitation used at the foot of interior pages */
-export function CtaBand({ title, accent, text }: { title: string; accent: string; text: string }) {
+export async function CtaBand({ title, accent, text }: { title: string; accent: string; text: string }) {
+  const t = await getTranslations();
   return (
     <section className="ip-cta" aria-labelledby="ip-cta-title">
       <div className="ip-cta-inner" data-reveal>
-        <h2 id="ip-cta-title">{title} <em>{accent}</em></h2>
-        <p>{text}</p>
+        <h2 id="ip-cta-title">{t(title)} <em>{t(accent)}</em></h2>
+        <p>{t(text)}</p>
         <EstimateActions light />
       </div>
     </section>
@@ -56,19 +60,20 @@ export const processSteps = [
   ['A final walkthrough', 'We walk the finished space with you, so you know it is done the way you wanted.'],
 ];
 
-export function ProcessSteps({ title, accent, note }: { title: string; accent: string; note: string }) {
+export async function ProcessSteps({ title, accent, note }: { title: string; accent: string; note: string }) {
+  const t = await getTranslations();
   return (
     <section className="ip-process" aria-labelledby="ip-process-title">
       <div className="ip-process-head" data-reveal>
-        <h2 id="ip-process-title">{title} <em>{accent}</em></h2>
-        <p>{note}</p>
+        <h2 id="ip-process-title">{t(title)} <em>{t(accent)}</em></h2>
+        <p>{t(note)}</p>
       </div>
       <ol className="ip-process-steps">
-        {processSteps.map(([t, d], i) => (
-          <li key={t} data-reveal>
+        {processSteps.map(([label, d], i) => (
+          <li key={label} data-reveal>
             <span className="ip-process-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{t}</h3>
-            <p>{d}</p>
+            <h3>{t(label)}</h3>
+            <p>{t(d)}</p>
           </li>
         ))}
       </ol>
