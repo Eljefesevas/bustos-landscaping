@@ -24,8 +24,8 @@ export async function HomeIntro() {
       </div>
 
       <figure className="hm-intro-image hm-photo" data-reveal>
-        <Image src={`${W}/backyard-lawn-patio.jpg`} alt={t("A backyard with a freshly cut lawn, a wide concrete patio and a new planting strip along an iron fence")} fill sizes="(max-width: 860px) 100vw, 42vw" />
-        <figcaption>{t("Lawn and concrete patio · project photo")}</figcaption>
+        <Image src={`${W}/hillside-project-planning.jpg`} alt={t("A landscape plan held in the foreground on a grassy hillside, with an excavator bucket on the left and a person in the distance")} fill sizes="(max-width: 860px) 100vw, 42vw" />
+        <figcaption>{t("Hillside project planning · job-site photo")}</figcaption>
       </figure>
 
       <dl className="hm-facts" data-reveal>
@@ -45,8 +45,8 @@ const featured = [
   { n: '04', title: 'Irrigation & Turf', text: 'Sprinkler systems and repair, sod, and artificial turf.', img: 'new-lawn-irrigation.jpg', alt: 'Sprinklers watering a newly laid lawn bordered by a curved concrete edge', anchor: 4, cls: 'hm-svc-d' },
 ];
 const more = [
-  { n: '05', title: 'Lawn Maintenance', text: 'Mowing, trimming of trees and bushes, and recurring care.', anchor: 1 },
-  { n: '06', title: 'Excavation & Demolition', text: 'Grading, demolition and site preparation for what comes next.', anchor: 5 },
+  { n: '05', title: 'Lawn Maintenance', text: 'Freshly maintained lawns with clean cuts, trimmed edges, and recurring care that keeps each property neat, healthy, and inviting.', img: 'residential-lawn-maintenance.jpg', alt: 'Freshly maintained residential lawn with a mower in the foreground', anchor: 1 },
+  { n: '06', title: 'Excavation & Demolition', text: 'Concrete demolition, debris removal, and site preparation completed with the equipment and care needed to get the next phase started right.', img: 'concrete-demolition-equipment.jpg', alt: 'Demolition project with broken concrete being removed using heavy equipment', anchor: 5 },
 ];
 
 export async function HomeServices() {
@@ -79,6 +79,7 @@ export async function HomeServices() {
           {more.map(s => (
             <li key={s.n}>
               <Link href={`/services#service-${s.anchor}`}>
+                <span className="hm-svc-more-photo hm-photo"><Image src={`${W}/${s.img}`} alt={t(s.alt)} fill sizes="(max-width: 860px) 100vw, 33vw"/></span>
                 <span className="hm-num">{s.n}</span>
                 <span className="hm-svc-title">{t(s.title)}</span>
                 <span className="hm-svc-text">{t(s.text)}</span>

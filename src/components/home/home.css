@@ -150,3 +150,14 @@ figure.hm-photo figcaption,.hm-work-item figcaption{position:absolute;left:14px;
 @media(prefers-reduced-motion:reduce){
   .reveal-ready .hm-photo img,.reveal-ready.hm-photo img{transform:none}
 }
+
+/* Photos for services 05 and 06 retain their existing numbered links. */
+.hm-svc-more-photo{grid-column:1/-1;width:100%;aspect-ratio:4/3}
+.hm-svc-more ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-6);border-top:0}
+.hm-svc-more li a{grid-template-columns:auto minmax(0,1fr) auto;align-items:start}
+.hm-svc-more li a .hm-svc-title{grid-column:2;grid-row:2}
+.hm-svc-more li a .hm-num{grid-column:1;grid-row:2}
+.hm-svc-more li a .hm-svc-text{grid-column:2;grid-row:3}
+.hm-svc-more li a>svg{grid-column:3;grid-row:2}
+@media(max-width:860px){.hm-svc-more{grid-template-columns:minmax(0,1fr)}.hm-svc-more ul{grid-column:1}.hm-svc-more .button{grid-column:1;justify-self:start;margin-top:var(--space-5)}}
+@media(max-width:560px){.hm-svc-more ul{grid-template-columns:minmax(0,1fr)}}

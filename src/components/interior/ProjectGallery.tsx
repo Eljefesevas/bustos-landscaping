@@ -63,8 +63,8 @@ export default function ProjectGallery({ projects }: { projects: Project[] }) {
             <li key={p.id} className={i % 5 === 0 ? 'ip-project ip-project-wide' : 'ip-project'}>
               <button type="button" className="ip-project-button" onClick={e => show(p, e.currentTarget)} aria-haspopup="dialog">
                 <span className="ip-photo ip-project-image">
-                  <Image src={cover.src} alt={t(cover.alt)} fill sizes={i % 5 === 0 ? '(max-width: 860px) 100vw, 66vw' : '(max-width: 860px) 100vw, 33vw'} />
-                  <span className="ip-project-count"><Images size={15} aria-hidden="true" /> {p.photos.length} {t("photos · ")}{t(categories.find(c => c.id === p.category)?.label)}</span>
+                  {p.sideBySide ? <span className="ip-project-pair">{p.photos.map(ph => <span className="ip-project-pair-photo" key={ph.src}><Image src={ph.src} alt={t(ph.alt)} fill sizes="(max-width: 860px) 50vw, 17vw"/><span className="ip-project-pair-label">{t(ph.caption)}</span></span>)}</span> : <Image src={cover.src} alt={t(cover.alt)} fill sizes={i % 5 === 0 ? '(max-width: 860px) 100vw, 66vw' : '(max-width: 860px) 100vw, 33vw'} />}
+                  <span className="ip-project-count"><Images size={15} aria-hidden="true" /> {p.sideBySide ? t("2 photos · Before & after") : <>{p.photos.length} {t("photos · ")}{t(categories.find(c => c.id === p.category)?.label)}</>}</span>
                 </span>
                 <span className="ip-project-meta">
                   <span className="ip-project-title">{t(p.title)}</span>

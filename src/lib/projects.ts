@@ -10,6 +10,7 @@ export type Project = {
   title: string;
   category: Category;
   summary: string;
+  sideBySide?: boolean;
   photos: Photo[];
   comparison?: { before: Photo; after: Photo; aligned: boolean };
 };
@@ -27,9 +28,9 @@ const pool = {
   before: { src: w('pool-deck-before'), alt: 'A backyard pool surrounded by bare, freshly graded soil and broken concrete along the block wall', caption: 'Before: graded soil around the pool' },
   after: { src: w('pool-deck-after'), alt: 'The same backyard with a flagstone-pattern stamped concrete deck surrounding the pool', caption: 'After: stamped concrete deck' },
 };
-const lawn = {
-  before: { src: w('front-lawn-before'), alt: 'A patchy, dry front lawn beside a low block wall and the street', caption: 'Before: dry, patchy lawn' },
-  after: { src: w('front-lawn-after'), alt: 'The same front yard covered in fresh green sod with a brick edge along the walkway', caption: 'After: new sod' },
+const removal = {
+  before: { src: w('concrete-removal-before'), alt: 'Before photo of a paved area being demolished in front of a building', caption: 'Before' },
+  after: { src: w('concrete-removal-after'), alt: 'After photo of the same area cleared and leveled in front of a building', caption: 'After' },
 };
 const drought = {
   before: { src: w('drought-yard-before'), alt: 'A corner front yard with a worn lawn along the sidewalk and red curb', caption: 'Before: worn lawn' },
@@ -47,12 +48,11 @@ export const projects: Project[] = [
       pool.after],
   },
   {
-    id: 'front-lawn', title: 'Front lawn renewed with sod', category: 'lawn',
-    summary: 'A tired front lawn replaced with fresh sod, edged by a brick border along the walkway.',
-    comparison: { ...lawn, aligned: true },
-    photos: [lawn.before,
-      { src: w('front-lawn-equipment'), alt: 'A compact loader parked in a narrow side yard during the work', caption: 'Equipment in the side yard' },
-      lawn.after],
+    id: 'concrete-removal', title: 'Concrete removal and site preparation', category: 'groundwork',
+    summary: 'A damaged paved area was removed and cleared, leaving the site clean and leveled for the next phase of the project.',
+    sideBySide: true,
+    comparison: { ...removal, aligned: true },
+    photos: [removal.before, removal.after],
   },
   {
     id: 'drought-yard', title: 'Lawn to drought-tolerant front yard', category: 'lawn',
