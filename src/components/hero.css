@@ -20,7 +20,7 @@
 /* Scene */
 .gh-scene{position:absolute;inset:0;z-index:-1}
 .gh-plate,.gh-canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 60%}
-.gh-plate-before{filter:saturate(.46) contrast(.86) brightness(1.04)}
+.gh-plate-before{filter:grayscale(100%)}
 .gh-plate-after{opacity:0}
 .gh-canvas{display:block;opacity:0;transition:opacity 1s var(--gh-ease)}
 .garden-hero.is-live .gh-canvas{opacity:1}

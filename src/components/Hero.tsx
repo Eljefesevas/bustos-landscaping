@@ -16,11 +16,11 @@ const sans = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600'],
 const PLATES = '/assets/hero/garden';
 const srcSet = (name: string) => `${PLATES}/${name}-1200.jpg 1200w, ${PLATES}/${name}-2000.jpg 2000w`;
 const stages = ['Site prepared', 'Planted', 'Finished'];
-// Landscape frames favour the beds and steps; the portrait crop holds on the steps and agaves at native resolution.
+// Both layers share the same completed-project photo and responsive crop.
 const sceneFor = (src: string) => {
-  if (src.includes('-portrait')) return { before: `${PLATES}/before-portrait.jpg`, after: `${PLATES}/after-portrait.jpg`, mask: `${PLATES}/growth-mask-portrait.jpg`, aspect: 900 / 1220, focus: [0.5, 0.5] as [number, number] };
+  if (src.includes('-portrait')) return { after: `${PLATES}/after-portrait.jpg`, mask: `${PLATES}/growth-mask-portrait.jpg`, aspect: 900 / 1220, focus: [0.5, 0.5] as [number, number] };
   const size = src.includes('-2000') ? 2000 : 1200;
-  return { before: `${PLATES}/before-${size}.jpg`, after: `${PLATES}/after-${size}.jpg`, mask: `${PLATES}/growth-mask.jpg`, aspect: 4 / 3, focus: [0.6, 0.6] as [number, number] };
+  return { after: `${PLATES}/after-${size}.jpg`, mask: `${PLATES}/growth-mask.jpg`, aspect: 4 / 3, focus: [0.6, 0.6] as [number, number] };
 };
 
 export default function Hero() {
@@ -94,8 +94,8 @@ export default function Hero() {
     <section ref={root} className={`garden-hero ${display.variable} ${sans.variable}`} aria-labelledby="hero-title">
       <div className="gh-scene" aria-hidden="true">
         <picture>
-          <source media="(orientation: portrait)" srcSet={`${PLATES}/before-portrait.jpg`} />
-          <img ref={beforeImg} className="gh-plate gh-plate-before" src={`${PLATES}/before-2000.jpg`} srcSet={srcSet('before')} sizes="100vw" alt="" fetchPriority="high" />
+          <source media="(orientation: portrait)" srcSet={`${PLATES}/after-portrait.jpg`} />
+          <img ref={beforeImg} className="gh-plate gh-plate-before" src={`${PLATES}/after-2000.jpg`} srcSet={srcSet('after')} sizes="100vw" alt="" fetchPriority="high" />
         </picture>
         <picture>
           <source media="(orientation: portrait)" srcSet={`${PLATES}/after-portrait.jpg`} />
