@@ -1,5 +1,5 @@
 /* Homepage below the hero. Built on the Phase 1 tokens in globals.css; every rule is
-   scoped to an .hm- class so nothing here can reach the hero (.garden-hero). */
+   scoped to an .hm- class so nothing here can reach the hero (.hx-). */
 
 .hm-intro,.hm-services,.hm-process,.hm-work,.hm-consult-inner{
   --hm-x:max(var(--gutter),calc((100% - var(--container))/2));

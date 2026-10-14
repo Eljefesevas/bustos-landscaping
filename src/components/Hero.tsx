@@ -1,129 +1,33 @@
-"use client";
-import { useTranslations } from '@/components/LanguageProvider';
+import HeroStage from './hero/HeroStage';
+import HeroBackground, { type Slide } from './hero/HeroBackground';
+import HeroCopy from './hero/HeroCopy';
+import HeroRail, { type RailLink } from './hero/HeroRail';
+import './hero/hero.css';
 
-import { useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
-import { Marcellus, Hanken_Grotesk } from 'next/font/google';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { createGardenRenderer, type GardenRenderer } from './gardenReveal';
-import './hero.css';
+/*
+  Homepage hero: "Golden Hour". A slow crossfading slideshow of real Bustos Landscaping
+  project photos (reused with the owners' authorization from bustoslandscaping.net), quiet
+  editorial type over it, and a service rail. Normal document scroll, no pinning.
+*/
+const slides: Slide[] = [
+  { src: '/assets/hero/slides/slide-backyard-lawn-patio.jpg', blur: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAYACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDpZ9YRCVtYXuGBwSowoP1p/wDacqxhrtfLDfdKAn8DWQlzafakcCWONYymwKCD79auRf2W/wDy+EcdGLA/rUqqnsxaFl9QtprGVlneHcrKHkXG07Sc49Kx9E1bS9F0WNZXMk0jFpPLj59MnNN8QWlnDYGeC5kkbcFGW3DB6/pXKG5mE72iFRJESqnPWhyl0BrS50BIzjtRhccGiiuCwijqS4jVc/ePaszUYTJDBeoDnaYpMdmHQ/iKKK6aWxql7h//2Q==', position: '38% 62%', portraitPosition: '30% 60%', drift: [-1.6, -1.2] },
+  { src: '/assets/hero/slides/slide-turf-concrete-patio.jpg', blur: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAVACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDp9PvLa9gk4id4ztby3B5/CodTvoraG2xG8guJBE3IG0HuaxLTQ4ix8y9kL/xeWqrn60l94a3ugs5dydWWV+nvQ5yS2JaQzSdf0LR0mtLfzuZWPmYyG5459MUQ+MrdtReS4ULEQFyuSQBnGffmnR+E8AGaZSM8qqAfqc1ZTwxpp/gkU9/u/wCFSpTfkFkVpbya3tIyrZkfq1X7DUJ5rsQNt27Mk45JxRRVjJry+ezUkIHXdjbnFRi+8zaQhX0w3T9KKKQH/9k=', position: '55% 55%', portraitPosition: '58% 55%', drift: [1.4, -1] },
+  { src: '/assets/hero/slides/slide-new-lawn-sprinklers.jpg', blur: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAYACADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCp/buhyn/j5kX3MTU5b/R5Gwl8mfQqR/Ss638MWwX9/JM7dTj5RVuLSdLgyEtt2epdjitP7SkjndCI3+0V+1qscQa33bd3O5voKgkmu77UVtY7OaKInDFlI47nOK3kvZoowsb4IHHHSrujTSXeoxpO+8EE4PsKxljak/db3NI0oJ3RLcW7oQfLKluAR61Dc2UnlCSWPfGejr2ooqKsUnoXQm5wTkZjxNG33iR2P9Kv+G2H9r7ifuxMcfkKKKwt7xTVpH//2Q==', position: '50% 62%', portraitPosition: '45% 60%', drift: [-1.2, 1.2] },
+];
 
-const display = Marcellus({ weight: '400', subsets: ['latin'], variable: '--gh-display' });
-const sans = Hanken_Grotesk({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--gh-sans' });
-
-const PLATES = '/assets/hero/garden';
-const srcSet = (name: string) => `${PLATES}/${name}-1200.jpg 1200w, ${PLATES}/${name}-2000.jpg 2000w`;
-const stages = ['Site prepared', 'Planted', 'Finished'];
-// Both layers share the same completed-project photo and responsive crop.
-const sceneFor = (src: string) => {
-  if (src.includes('-portrait')) return { after: `${PLATES}/after-portrait.jpg`, mask: `${PLATES}/growth-mask-portrait.jpg`, aspect: 900 / 1220, focus: [0.5, 0.5] as [number, number] };
-  const size = src.includes('-2000') ? 2000 : 1200;
-  return { after: `${PLATES}/after-${size}.jpg`, mask: `${PLATES}/growth-mask.jpg`, aspect: 4 / 3, focus: [0.6, 0.6] as [number, number] };
-};
+const rail: RailLink[] = [
+  { label: 'Landscape Design', href: '/services#service-0' },
+  { label: 'Hardscape & Concrete', href: '/services#service-2' },
+  { label: 'Irrigation', href: '/services#service-4' },
+  { label: 'Outdoor Living', href: '/our-work' },
+];
 
 export default function Hero() {
-  const t = useTranslations();
-  const root = useRef<HTMLElement>(null);
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const beforeImg = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const section = root.current, surface = canvas.current, fallback = beforeImg.current;
-    if (!section || !surface || !fallback) return;
-    const media = gsap.matchMedia();
-
-    media.add({ small: '(max-width: 767px)', portrait: '(orientation: portrait)', motion: '(prefers-reduced-motion: no-preference)' }, ctx => {
-      const { small, motion } = ctx.conditions as { small: boolean; motion: boolean };
-      if (!motion) return;
-      let renderer: GardenRenderer | null = null;
-      let cancelled = false;
-      const state = { p: 0 };
-      let stage = -1;
-
-      const paint = () => {
-        renderer?.render(state.p);
-        section.style.setProperty('--p', state.p.toFixed(4));
-        const next = state.p < 0.36 ? 0 : state.p < 0.8 ? 1 : 2;
-        if (next !== stage) { stage = next; section.dataset.stage = String(next); }
-      };
-
-      const tween = gsap.to(state, {
-        p: 1,
-        ease: 'none',
-        onUpdate: paint,
-        scrollTrigger: { trigger: section, start: 'top top', end: small ? '+=110%' : '+=170%', pin: true, scrub: 1.1, anticipatePin: 1, invalidateOnRefresh: true },
-      });
-      paint();
-
-      const start = async () => {
-        if (!fallback.complete) await new Promise(r => fallback.addEventListener('load', r, { once: true }));
-        try {
-          renderer = await createGardenRenderer(surface, sceneFor(fallback.currentSrc || fallback.src));
-          if (cancelled) { renderer.destroy(); renderer = null; return; }
-          renderer.render(state.p);
-          section.classList.add('is-live');
-        } catch {
-          section.classList.add('is-static');
-        }
-      };
-      start();
-
-      const onResize = () => { renderer?.resize(); renderer?.render(state.p); };
-      const observer = new ResizeObserver(onResize);
-      observer.observe(surface);
-
-      return () => {
-        cancelled = true;
-        observer.disconnect();
-        tween.scrollTrigger?.kill();
-        tween.kill();
-        renderer?.destroy();
-        renderer = null;
-        section.classList.remove('is-live');
-        section.style.removeProperty('--p');
-        delete section.dataset.stage;
-      };
-    });
-    return () => media.revert();
-  }, []);
-
   return (
-    <section ref={root} className={`garden-hero ${display.variable} ${sans.variable}`} aria-labelledby="hero-title">
-      <div className="gh-scene" aria-hidden="true">
-        <picture>
-          <source media="(orientation: portrait)" srcSet={`${PLATES}/after-portrait.jpg`} />
-          <img ref={beforeImg} className="gh-plate gh-plate-before" src={`${PLATES}/after-2000.jpg`} srcSet={srcSet('after')} sizes="100vw" alt="" fetchPriority="high" />
-        </picture>
-        <picture>
-          <source media="(orientation: portrait)" srcSet={`${PLATES}/after-portrait.jpg`} />
-          <img className="gh-plate gh-plate-after" src={`${PLATES}/after-2000.jpg`} srcSet={srcSet('after')} sizes="100vw" alt="" loading="lazy" />
-        </picture>
-        <canvas ref={canvas} className="gh-canvas" />
-        <div className="gh-shade" />
-      </div>
-
-      <div className="gh-copy">
-        <p className="gh-services">
-          {t("Landscape Design")}<i aria-hidden="true"> • </i>{t("Installation")}<i aria-hidden="true"> • </i>{t("Outdoor Living ")}</p>
-        <h1 id="hero-title">{t("Bringing Outdoor Spaces to Life")}</h1>
-        <p className="gh-lede">{t("Thoughtful landscaping, refined craftsmanship, and a personal process from concept to completion.")}</p>
-        <div className="gh-actions">
-          <Link className="gh-button gh-button-primary" href="/our-work">{t("View Our Work ")}<ArrowUpRight size={18} strokeWidth={1.6} aria-hidden="true" /></Link>
-          <Link className="gh-button gh-button-quiet" href="/contact">{t("Start Your Project")}</Link>
-        </div>
-      </div>
-
-      <div className="gh-foot">
-        <div className="gh-progress" aria-hidden="true">
-          <div className="gh-track"><span /></div>
-          <ol>{stages.map((s, i) => <li key={s} data-i={i}>{t(s)}</li>)}</ol>
-        </div>
-        <p className="gh-credit">{t("Concept scene, not a Bustos project. Photo: Gene Giromini / Unsplash")}</p>
-      </div>
-      <p className="gh-cue" aria-hidden="true"><span />{t("Scroll to bring the garden in")}</p>
-    </section>
+    <HeroStage count={slides.length} labelledBy="hero-title">
+      <HeroBackground slides={slides} />
+      <HeroCopy />
+      <HeroRail links={rail} />
+    </HeroStage>
   );
 }
